@@ -9,9 +9,9 @@ class TaskItem extends Component {
                 <td className="text-center">
                     {
                         true ? 
-                            <span className="label label-danger" onClick={this.onUpdateStatus}>Kích hoạt</span> 
+                            <span className="label label-success" onClick={this.onUpdateStatus}>Kích hoạt</span> 
                             : 
-                            <span className="label label-success" onClick={this.onUpdateStatus}>Ẩn</span>
+                            <span className="label label-default" onClick={this.onUpdateStatus}>Ẩn</span>
                     }
                     
                 </td>
