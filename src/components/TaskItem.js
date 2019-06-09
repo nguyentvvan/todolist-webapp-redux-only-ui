@@ -6,7 +6,12 @@ class TaskItem extends Component {
     }
 
     onEditTask = () => {
+        debugger
         this.props.onEditTask(this.props.task);
+    }
+
+    onDeleteTask = () => {
+        this.props.onDeleteTask(this.props.task.id);
     }
 
     render(){

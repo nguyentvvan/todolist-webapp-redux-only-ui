@@ -18,9 +18,9 @@ class TaskForm extends Component {
 
     onSubmit = (event) => {
         event.preventDefault();
-        var {name, status} = this.state;
+        var {id, name, status} = this.state;
         if (name) {
-            this.props.onSaveTask({name, status});
+            this.props.onSaveTask({id, name, status});
             this.props.onCloseForm();
         }
     }

@@ -50,11 +50,27 @@ class App extends Component {
 
   onSaveTask = (task) => {
     var {tasks} = this.state;
-    tasks.push({
-      id: this.generateRandomId(),
-      name: task.name,
-      status: task.status
-    })
+    debugger
+    if (task.id) {
+      var index = this.findIndex(tasks, task.id);
+      if (index !== -1) {
+        tasks[index] = task;
+      }
+    } else {
+      if (tasks) {
+        tasks.push({
+          id: this.generateRandomId(),
+          name: task.name,
+          status: task.status
+        });
+      } else {
+        tasks = [{
+          id: this.generateRandomId(),
+          name: task.name,
+          status: task.status
+        }];
+      }
+    }
     this.setState({
       tasks: tasks
     });
@@ -77,10 +93,24 @@ class App extends Component {
   }
 
   onEditTask = (task) => {
+    debugger
     this.setState({
       taskUpdating: task,
       isDisplayForm: true
     });
+  }
+
+  onDeleteTask = (id) => {
+    var {tasks} = this.state;
+    var index = this.findIndex(tasks, id);
+    if (index !== -1) {
+      tasks.splice(index, 1);
+    }
+    this.setState({
+      tasks: tasks
+    });
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
   }
 
   render(){
@@ -110,7 +140,8 @@ class App extends Component {
                 <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                   <TaskList tasks={tasks} 
                     onUpdateStatus={this.onUpdateStatus}
-                    onEditTask={this.onEditTask} />
+                    onEditTask={this.onEditTask}
+                    onDeleteTask={this.onDeleteTask} />
                 </div>
               </div>
             </div>
