@@ -3,6 +3,19 @@ import TaskItem from './TaskItem';
 
 class TaskList extends Component {
     render(){
+        var taskElements = [];
+        var {tasks} = this.props;
+        if (tasks) {
+            taskElements = tasks.map((task, index) => {
+                return(
+                    <TaskItem key={index} index={index} task={task} 
+                        onUpdateStatus={this.props.onUpdateStatus}
+                        onEditTask={this.props.onEditTask}
+                    />
+                )
+            });
+        }
+
         return (
             <table className="table table-bordered table-hover">
                 <thead>
@@ -28,8 +41,7 @@ class TaskList extends Component {
                         </td>
                         <td></td>
                     </tr>
-                    <TaskItem />
-                    <TaskItem />
+                    {taskElements}
                 </tbody>
             </table>
         );
